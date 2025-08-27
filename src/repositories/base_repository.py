@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Dict
 from bson import ObjectId
 from src.database import db
 
@@ -11,24 +11,25 @@ class BaseRepository:
         data["_id"] = str(result.inserted_id)
         return data
 
-    async def find_by_id(self,id: str) -> Optional[dict]:
-        doc = await self.collection.find_one({"_id": ObjectId(id), "is_deleted": False})
-        if doc:
-            doc["_id"] = str(doc["_id"])
-        return doc
+    async def find_by_key(self, filter : Dict) -> Optional[dict]:
+        filter["is_deleted"] = False
+        return await self.collection.find_one(filter)
 
-    async def find_all(self, is_deleted : bool = False) -> List[dict]:
+    async def find_all(self, is_deleted: bool = False) -> List[dict]:
         docs = []
-        cursor = self.collection.find({"is_deleted": is_deleted})  # Cursor, not awaitable
-        async for doc in cursor:  # Correct way to iterate
+        cursor = self.collection.find({"is_deleted": is_deleted})
+        async for doc in cursor:
             doc["_id"] = str(doc["_id"])
             docs.append(doc)
         return docs
 
-    async def update(self, id: str, data: dict) -> Optional[dict]:
-        await self.collection.update_one({"_id": ObjectId(id)}, {"$set": data})
-        return await self.find_by_id(id)
+    async def update(self, filter : Dict, data: dict) -> Optional[dict]:
+        await self.collection.update_one(filter, {"$set": data})
+        return await self.collection.find_one(filter)
 
-    async def delete(self, id: str) -> bool:
-        result = await self.collection.delete_one({"_id": ObjectId(id)})
-        return result.deleted_count == 1
+    async def delete_one(self,filter : Dict ) -> bool:
+        result = await self.collection.update_one(
+            filter,
+            {"$set": {"is_deleted": True}}
+        )
+        return result.modified_count == 1

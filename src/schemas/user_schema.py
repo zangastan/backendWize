@@ -1,5 +1,5 @@
 from .base_schema import BaseSchema
-from pydantic import EmailStr, Field, field_validator
+from pydantic import EmailStr, Field, field_validator, model_validator
 from src.database import PyObjectId
 from typing import Optional
 from enum import Enum
@@ -40,16 +40,34 @@ class Genders(str, Enum):
     FEMALE = "female"
     RNS = "rns"  # rather not say
 
+# --- Response Schema --- #
+class UserResponse(BaseSchema):
+    id: Optional[str] = None
+    email: Optional[EmailStr] = None
+    full_name: Optional[str] = None
+    role: Optional[UserRoles] = None
+    staff_role: Optional[StaffRoles] = None
+
+    class Config:
+        orm_mode = True
+
+    @model_validator(mode="before")
+    def convert_objectid(cls, values):
+        # Map Mongo _id to id
+        if "_id" in values:
+            values["id"] = str(values.pop("_id"))
+        return values
 
 # ---- User Schema ---- #
 class UserSchema(BaseSchema):
     # Authentication
+    _id : Optional[str] = ""
     email: EmailStr
     password_hash: str
 
     # Profile
-    full_name: str
-    gender: Genders
+    full_name: Optional[str] = None
+    gender: Optional[Genders] = None
     dob: datetime   # ✅ store as datetime so Mongo accepts it
     phone_number: Optional[str] = None
     preferred_lang: Optional[str] = "en" 
@@ -58,9 +76,7 @@ class UserSchema(BaseSchema):
     # Role & Relationships
     role: UserRoles
     staff_role: Optional[StaffRoles] = None   # Only required if role == STAFF
-    linked_patient_id: Optional[PyObjectId] = None
-    linked_staff_id: Optional[PyObjectId] = None
-
+    
     # ---- Config ---- #
     class Config:
         use_enum_values = True  # Enums will serialize as "admin", not <UserRoles.ADMIN: 'admin'>
@@ -73,10 +89,10 @@ class UserSchema(BaseSchema):
             return datetime.combine(v, datetime.min.time())
         return v
     
-    @field_validator("linked_patient_id", "linked_staff_id", mode="before")
-    def convert_objectid_to_str(cls, v):
-        if v is not None:
-            return str(v)  # convert ObjectId to string
-        return v
+    # @field_validator("linked_patient_id", "linked_staff_id", mode="before")
+    # def convert_objectid_to_str(cls, v):
+    #     if v is not None:
+    #         return str(v)  # convert ObjectId to string
+    #     return v
     
 
