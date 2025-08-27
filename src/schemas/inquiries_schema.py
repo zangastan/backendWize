@@ -1,3 +1,4 @@
+# inquries schema
 from .base_schema import BaseSchema
 from src.database import PyObjectId
 from typing import Optional, List, Dict
