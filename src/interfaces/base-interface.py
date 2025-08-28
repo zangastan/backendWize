@@ -5,7 +5,7 @@ class BaseRepositoryInterface:
     async def create(self, data: dict) -> Any:
         raise NotImplementedError
 
-    async def find_by_key(self,is_deleted: bool, filter : Dict) -> Optional[dict]:
+    async def find_by_key(self, filter : Dict) -> Optional[dict]:
         raise NotImplementedError
 
     async def find_all(self, is_deleted : bool) -> List[dict]:

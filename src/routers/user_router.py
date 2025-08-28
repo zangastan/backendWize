@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Depends
 
 # --- SCHEMA --- 
-from src.schemas.user_schema import UserSchema, UserResponse
+from src.schemas.user_schema import UserSchema, UserResponse, UpdateUserSchema
 from src.schemas.auth_schema import UserCreate, UserLogin, Token
 from src.schemas.patients_schema import PatientSchema
 from src.schemas.staff_schema import StaffSchema
@@ -65,18 +65,18 @@ async def find_all():
 
 
 # --- Update User --- #
-@router.put("/update/{email}", response_model=UserSchema)
-async def update_user(email: str, data: UserSchema):
-    user = await userService.update(email, data.model_dump(exclude_unset=True))
+@router.put("/update", response_model=UpdateUserSchema)
+async def update_user(email: str, data: UpdateUserSchema):
+    user = await userService.update({"email" : email}, data.model_dump(exclude_unset=True))
     if not user:
         raise HTTPException(status_code=500, detail="Failed to update user")
-    return UserSchema(**user)
+    return UpdateUserSchema(**user)
 
 
 # --- Delete User --- #
-@router.delete("/delete/{id}")
-async def delete_user(id: str):
-    success = await userService.delete_one(id)
+@router.delete("/delete")
+async def delete_user(email: str):
+    success = await userService.delete_one({"email" : email})
     if not success:
         raise HTTPException(status_code=404, detail="User not found or already deleted")
     return {"message": "User soft deleted successfully"}

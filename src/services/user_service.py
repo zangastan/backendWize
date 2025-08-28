@@ -34,7 +34,7 @@ class UserService(BaseService):
         patient: PatientSchema | None = None, 
         staff: StaffSchema | None = None
     ) -> dict:
-        existing_user = await self.repository.find_by_email(user.email)
+        existing_user = await self.repository.find_by_key({"email" :user.email})
         if existing_user:
             raise ValueError("User already exists")
 
@@ -74,7 +74,7 @@ class UserService(BaseService):
     
     # --- user login --- #
     async def login(self, user: UserLogin) -> Token:
-        db_user = await self.repository.find_by_email(user.email)
+        db_user = await self.repository.find_by_key({"email":user.email})
         if not db_user or not verify_password(user.password, db_user["password_hash"]):
             raise ValueError("Invalid credentials")
 

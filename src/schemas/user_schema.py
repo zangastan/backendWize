@@ -58,6 +58,15 @@ class UserResponse(BaseSchema):
             values["id"] = str(values.pop("_id"))
         return values
 
+
+# --- Update User Schema ---#
+class UpdateUserSchema(BaseSchema):
+    full_name: Optional[str] = None
+    phone_number : Optional[str] = None
+    address : Optional[str]  = None
+    preferred_lang : Optional[str] = None
+    accessibility : Optional[str]  = None
+    
 # ---- User Schema ---- #
 class UserSchema(BaseSchema):
     # Authentication
