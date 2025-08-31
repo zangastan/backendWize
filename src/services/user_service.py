@@ -71,7 +71,7 @@ class UserService(BaseService):
             await self.staff_repo.create(staff_data)
 
         return new_user
-    
+
     # --- user login --- #
     async def login(self, user: UserLogin) -> Token:
         db_user = await self.repository.find_by_key({"email":user.email})
@@ -83,6 +83,7 @@ class UserService(BaseService):
             "email": db_user["email"],
             "role": db_user["role"],
         }
+
         access_token = create_access_token(payload)
         refresh_token = create_refresh_token(payload)
         return Token(access_token=access_token, refresh_token=refresh_token)
