@@ -5,7 +5,7 @@ from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings
 
 # Load hospital knowledge
-loader = TextLoader("hospital_knowledge.txt")
+loader = TextLoader("augustine_info.txt")
 documents = loader.load()
 
 # Split documents into smaller chunks for embeddings
@@ -28,16 +28,15 @@ def answer_question(query: str):
     for r in results:
         content = r.page_content
         # Append only if it has department or recommendation keywords
-        if any(keyword in content.lower() for keyword in ["department", "emergency", "opd", "ob/gyn", "surgery", "endoscopy", "recommendation"]):
+        if any(keyword in content.lower() for keyword in ["Personal", "Skills", "Education", "Interests", "Passion", "Hobbies"]):
             answer += content + "\n\n"
     
-    # If nothing relevant found, give fallback guidance
+    # If nothing relevant found
     if not answer.strip():
-        answer = "Please contact Wezi Medical Centre at +265 880 33 39 80 for accurate guidance."
+        answer = "Please contact Augustine Kasolota at call: +265 989 728 826 or email: kasolotaaugustine@gmail.com for more information."
     
     return answer.strip()
 
-# Example usage
 if __name__ == "__main__":
-    query = "I have stomach pain and nausea. Which department should I visit?"
+    query = "What are Augustine Kasolota's skills?"
     print(answer_question(query))

@@ -3,8 +3,8 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from bson import ObjectId
 from typing import Any
 from pydantic_core import core_schema
-MONGO_URI = "mongodb://localhost:27017"
-DB_NAME = "wezi_clinic"
+MONGO_URI = "mongodb+srv://stanashady1:d0B3bR2FlscqhYNp@cluster0.4prt2wj.mongodb.net/portfolio?retryWrites=true&w=majority&appName=Cluster0"
+DB_NAME = "portfolio"
 
 client = AsyncIOMotorClient(MONGO_URI)
 db = client[DB_NAME]

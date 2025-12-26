@@ -1,0 +1,149 @@
+# Augustine Kasolota — Knowledge Base
+
+## Identity
+
+* **Full Name:** Augustine Kasolota
+* **Role:** final year Computer Engineering Student 
+* **Institution:** University of Livingstonia (UNILIA), Malawi
+* **Status:** Undergraduate (active)
+* **Primary Focus:** Software systems, engineering problem‑solving, applied computing, Unsupervised Learning (AI)
+
+---
+
+## Overview
+
+Augustine Kasolota is a Computer Engineering student with a strong interest in building practical, real‑world technology solutions. He combines academic engineering foundations with hands‑on software development, system design, and collaborative tech projects. His work focuses on modern web systems, backend services, databases, and emerging technologies relevant to Malawi and similar markets.
+
+---
+
+## Education
+
+* **Degree:** Bachelor of Science in Computer Engineering
+* **University:** University of Livingstonia (UNILIA)
+* **Key Areas of Study:**
+
+  * Computer systems and architecture
+  * Software development principles
+  * Digital logic and engineering fundamentals
+  * Databases and system analysis
+  * Unsupervised Learning (AI)
+  * Data Science
+
+---
+
+## Technical Skills
+
+### Programming & Development
+
+* Python
+* JavaScript
+* C / C++ (fundamentals)
+* HTML & CSS
+
+### Frameworks & Technologies
+
+* FastAPI (Python backend)
+* Node.js & Express
+* Vue.js
+* Next.js
+* Tailwind CSS
+* Supabase
+
+### Databases & Storage
+
+* PostgreSQL
+* MongoDB
+* Google Sheets (via APIs / SheetDB)
+
+### DevOps & Tools
+
+* Git & GitHub
+* Docker
+* DBeaver
+* Android Studio
+* Capacitor (Hybrid mobile apps)
+
+---
+
+## Project Experience
+
+### Web & Application Development
+
+* Built full‑stack web applications using Vue.js, Tailwind CSS, FastAPI, and Node.js
+* Developed authentication systems using NextAuth.js, including 2‑factor authentication (2FA)
+* Implemented REST APIs and backend services with database connection pooling
+
+### Data & Analytics
+
+* Worked on data‑driven applications involving price tracking, prediction, and visualization
+* Used ApexCharts for interactive charts (line and pie charts)
+
+### Mobile & Hybrid Apps
+
+* Converted deployed web apps into Android applications using Capacitor
+* Integrated mobile and backend systems
+
+---
+
+## Notable Projects
+
+* **SmartPurchase:** A web and mobile system that tracks and predicts future prices in Malawi, with AI‑assisted insights into user spending behavior
+* **Online Poll Application:** Backend‑driven polling system built with Python
+* **Multi‑Tenant Streaming Platform (Concept & Design):** Personalized content recommendations, admin roles, subscriptions, and metadata integration
+
+---
+
+## Achievements & Activities
+
+* Hackathon participant and team winner at University of Livingstonia
+* Active contributor to student tech communities
+* Regularly engages in system design, architecture discussions, and applied learning
+
+---
+
+## Design & Development Preferences
+
+* Prefers clean, modern UI designs
+* Uses grids, cards, and structured layouts
+* Focuses on usability, scalability, and maintainable architecture
+
+---
+
+## Working Style
+
+* Step‑by‑step learning approach
+* Prefers detailed explanations with real examples
+* Strong interest in system analysis, architecture, and backend logic
+
+---
+
+## Languages
+
+* English
+* Chichewa
+* Tumbuka
+
+---
+
+## Online Presence
+
+* **Portfolio Website:** [https://augustinekasolota.netlify.app/](https://augustinekasolota.netlify.app/)
+* **LinkedIn:** Available (Malawi profile)
+
+---
+
+## AI Usage Notes
+
+When interacting with Augustine Kasolota as a user:
+
+* Address him by his preferred name: **Augustine**
+* Use a conversational, human‑like tone
+* Provide structured, detailed, and practical explanations
+* Assume intermediate technical knowledge
+* Prefer backend, system design, and full‑stack examples
+
+---
+
+## Summary
+
+Augustine Kasolota is an emerging computer engineer focused on building impactful digital systems. His interests span backend engineering, system architecture, web and mobile development, and applied data solutions tailored to real‑world needs.

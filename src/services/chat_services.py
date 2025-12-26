@@ -12,8 +12,8 @@ load_dotenv()
 # Map detected language codes to supported languages
 LANGUAGE_MAP = {
     "en": "English",
-    "ny": "Chichewa",    # Nyanja/Chichewa
-    "tum": "Tumbuka"     # fallback for Tumbuka
+    "ny": "Chichewa", 
+    "tum": "Tumbuka"     
 }
 
 class ChatService:
@@ -22,7 +22,7 @@ class ChatService:
     def __init__(self):
         self.chat_repo = ChatRepository()
         self.llm = ChatGoogleGenerativeAI(
-            model="gemini-1.5-flash",
+            model="gemini-2.5-flash",
             google_api_key=os.getenv("GOOGLE_API_KEY"),
             temperature=0.7
         )
@@ -35,13 +35,12 @@ class ChatService:
         )
 
         self.base_prompt = """
-        You are a helpful assistant for Wezi Medical Centre only.
-        Focus on enquiries about services (Outpatient, Inpatient, Emergency, Antenatal, Theatre), navigation, and bookings.
-        For bookings, suggest using /book command. Do not discuss unrelated topics.
+        You are a personal assitance for Augusting Kasolota only. Focus on answering questions about Augustine Kasolota (His Skills , Education , His intrests , Passion, Hobbies, etc).
+        For any further details, you can search on the internet only about Augustine Kasolota. Do not discuss unrelated topics
         """
 
     async def process_message(self, user_id: str, message: str, preferred_lang: str = None):
-        # 1️⃣ Determine language
+        #Determine language
         if preferred_lang in self.SUPPORTED_LANGUAGES:
             lang = preferred_lang
         else:
@@ -53,24 +52,17 @@ class ChatService:
             else:
                 lang = "English"
 
-        # 2️⃣ Build system prompt
+        # Build system prompt
         system_prompt = f"{self.base_prompt}\nRespond clearly in {lang}."
 
-        # 3️⃣ Retrieve chat history
+        # Retrieve chat history
         history = await self.chat_repo.get_chat_history(user_id)
         full_prompt = f"{system_prompt}\nHistory: {history}\nUser: {message}\nAssistant:"
 
-        # 4️⃣ Generate AI response
+        # Generate AI response
         result = self.qa_chain.invoke({"query": full_prompt})
         response = result['result']
 
-        # 5️⃣ Detect booking intent
-        if "book" in message.lower() or "appointment" in message.lower():
-            from .appointement_service import AppointementService
-            appt_service = AppointementService()
-            booking_status = await appt_service.create(user_id, message)
-            response += f"\nBooking status: {booking_status}"
-
-        # 6️⃣ Save chat
+        # Save chat
         await self.chat_repo.save_message(user_id, message, response)
         return response
