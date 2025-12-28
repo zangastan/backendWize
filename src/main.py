@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import chat_router
+from  routers import chat_router
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="Personal Assistant for Augustine Kasolota ")

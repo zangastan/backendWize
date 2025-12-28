@@ -1,6 +1,6 @@
 from typing import List, Optional, Dict
 from bson import ObjectId
-from src.database import db
+from  database import db
 
 class BaseRepository:
     def __init__(self, collection_name: str):

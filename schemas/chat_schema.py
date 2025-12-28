@@ -2,7 +2,7 @@
 from pydantic import BaseModel, Field
 from typing import Optional
 from datetime import datetime
-from src.database import PyObjectId
+from  database import PyObjectId
 
 class ChatMessageSchema(BaseModel):
     patientId: PyObjectId
