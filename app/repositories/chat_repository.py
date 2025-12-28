@@ -1,6 +1,6 @@
 # src/repositories/chat_repository.py
 from typing import List, Optional, Dict
-from  repositories.base_repository import BaseRepository
+from  app.repositories.base_repository import BaseRepository
 
 class ChatRepository(BaseRepository):
     def __init__(self):
