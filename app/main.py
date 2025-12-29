@@ -26,6 +26,3 @@ app.include_router(chat_router.router)
 @app.get("/")
 def main_root():
     return {"message": "Backend is running..."}
-
-
-# LindaKasolota@29
