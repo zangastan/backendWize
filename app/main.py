@@ -7,7 +7,9 @@ app = FastAPI(title="Personal Assistant for Augustine Kasolota ")
 
 origins = [
     "http://localhost:3000",
-    "https://augustinekasolota.netlify.app"
+    "https://augustinekasolota.netlify.app",
+    "http://localhost:5173/",
+    "*"
 ]
 
 app.add_middleware(
